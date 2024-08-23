@@ -23,7 +23,7 @@ const CardList: React.FC<Props> = ({
           ></Card>
         ))
       ) : (
-        <p>No result</p>
+        <p>Search for a Company name or ticker symbol </p>
       )}
     </div>
   );

@@ -2,11 +2,13 @@ import { SyntheticEvent, useState } from "react";
 import "./App.css";
 import CardList from "./Components/CardList/CardList";
 import Search from "./Components/Search/Search";
-import { searchCompanies } from "./api";
+import { searchCompanies } from "./Api";
 import { CompanySearch } from "./company";
+import ListPortfolio from "./Components/Portfolio/ListPortfolio/ListPortfolio";
 
 function App() {
   const [search, setSearch] = useState<string>("");
+  const [portfolioValues, setPortfolioValues] = useState<string[]>([]);
   const [searchResult, setSearchResult] = useState<CompanySearch[]>([]);
   const [serverError, setServerError] = useState<string>("");
 
@@ -27,9 +29,22 @@ function App() {
     }
   };
 
-  const onPortfolioCreate = (e: SyntheticEvent) => {
+  const onPortfolioCreate = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(e);
+    const inputElement = (e.target as HTMLFormElement).elements[0] as HTMLInputElement;
+    if (portfolioValues.find((item) => item === inputElement.value)) {
+      return;
+    }
+    const updatedPortfolio = [...portfolioValues, inputElement.value];
+    setPortfolioValues(updatedPortfolio);
+  };
+
+  const onPortfolioItemDelete = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const inputElement = (e.target as HTMLFormElement).elements[0] as HTMLInputElement;
+    setPortfolioValues(portfolioValues.filter(
+      (item) => item !== inputElement.value
+    ))
   };
   return (
     <>
@@ -39,6 +54,12 @@ function App() {
           handleSearchSubmit={handleSearchSubmit}
           handleSearchChange={handleSearchChange}
         />
+        {portfolioValues.length > 0 && (
+          <ListPortfolio
+            data={portfolioValues}
+            onPortfolioItemDelete={onPortfolioItemDelete}
+          />
+        )}
         {serverError && <h2>{serverError}</h2>}
         <CardList
           onPortfolioCreate={onPortfolioCreate}
