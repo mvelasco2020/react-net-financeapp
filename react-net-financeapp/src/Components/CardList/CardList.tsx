@@ -12,7 +12,7 @@ const CardList: React.FC<Props> = ({
   onPortfolioCreate,
 }: Props): JSX.Element => {
   return (
-    <div>
+    <div className=" pt-10 bg-slate-100 min-w-full">
       {searchResult.length > 0 ? (
         searchResult.map((result) => (
           <Card
@@ -23,7 +23,9 @@ const CardList: React.FC<Props> = ({
           ></Card>
         ))
       ) : (
-        <p>Search for a Company name or ticker symbol </p>
+        <p className="mb-3 mt-3 text-xl font-semibold text-center md:text-xl">
+          No results!
+        </p>
       )}
     </div>
   );
