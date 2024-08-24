@@ -2,5 +2,10 @@ npm i vite
 npm create vite@latest
 npm i axios --save
 npm i dotenv --save
-npm install -d tailwindcss
-npx tailwind init
+npm install -D tailwindcss postcss autoprefixer
+
+npx tailwind init -p
+npm install -save react-router
+npm install -save react-router-dom
+npm install --save @types/react-router-dom
+npm install --save @types/react-router
