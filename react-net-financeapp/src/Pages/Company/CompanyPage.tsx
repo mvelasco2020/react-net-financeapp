@@ -1,13 +1,13 @@
-import React from 'react'
+import React from "react";
 
-interface props {
-    
-}
+interface props {}
 
 const CompanyPage = (props: Props) => {
   return (
-    <div>Company</div>
-  )
-}
+    <div>
+      <h1>Company Page</h1>
+    </div>
+  );
+};
 
-export default CompanyPage
+export default CompanyPage;
